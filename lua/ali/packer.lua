@@ -41,14 +41,14 @@ return require("packer").startup(function(use)
 		"jose-elias-alvarez/null-ls.nvim",
 		requires = { "nvim-lua/plenary.nvim" },
 	})
+
+	-- mason-null-ls
+	use("jay-babu/mason-null-ls.nvim")
+
+	-- vim-be-good
 	use({ "ThePrimeagen/vim-be-good" })
-	use({
-		"loctvl842/monokai-pro.nvim",
-		as = "monokai-pro",
-		config = function()
-			require("monokai-pro").setup()
-		end,
-	})
+
+	-- Comment
 	use({
 		"numToStr/Comment.nvim",
 		config = function()

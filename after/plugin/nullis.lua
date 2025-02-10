@@ -26,6 +26,10 @@ null_ls.setup({
 			filetypes = { "go" }, -- Only apply to Go files
 		}),
 
+		null_ls.builtins.formatting.stylua.with({
+			filetypes = { "lua" }, -- Only apply to Lua files
+		}),
+
 		-- stylua for Lua files
 		null_ls.builtins.formatting.stylua.with({
 			filetypes = { "lua" }, -- Only apply to Lua files
