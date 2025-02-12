@@ -26,10 +26,6 @@ null_ls.setup({
 			filetypes = { "go" }, -- Only apply to Go files
 		}),
 
-		null_ls.builtins.formatting.stylua.with({
-			filetypes = { "lua" }, -- Only apply to Lua files
-		}),
-
 		-- stylua for Lua files
 		null_ls.builtins.formatting.stylua.with({
 			filetypes = { "lua" }, -- Only apply to Lua files
@@ -45,4 +41,16 @@ null_ls.setup({
 			})
 		end
 	end,
+})
+
+--
+--
+--
+
+
+require("mason-null-ls").setup({
+	ensure_installed = {
+		"golint", -- Go linter
+	},
+	automatic_installation = true,
 })
