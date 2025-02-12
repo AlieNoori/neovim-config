@@ -9,3 +9,5 @@ vim.diagnostic.config({
 	float = { border = "rounded" },
 	update_in_insert = false,
 })
+
+vim.diagnostic.config({virtual_lines=true})
