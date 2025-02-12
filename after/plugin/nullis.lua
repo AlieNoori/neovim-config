@@ -16,11 +16,6 @@ null_ls.setup({
 			},
 		}),
 
-		-- gofmt for Go files
-		null_ls.builtins.formatting.gofmt.with({
-			filetypes = { "go" }, -- Only apply to Go files
-		}),
-
 		-- gofumpt for Go files (stricter formatting)
 		null_ls.builtins.formatting.gofumpt.with({
 			filetypes = { "go" }, -- Only apply to Go files
@@ -46,7 +41,6 @@ null_ls.setup({
 --
 --
 --
-
 
 require("mason-null-ls").setup({
 	ensure_installed = {

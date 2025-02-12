@@ -26,7 +26,7 @@ return require("packer").startup(function(use)
 		end,
 	})
 
-	-- harpoon 
+	-- harpoon
 	use("ThePrimeagen/harpoon")
 
 	-- mason - lsp manager
@@ -43,18 +43,18 @@ return require("packer").startup(function(use)
 			"hrsh7th/cmp-nvim-lsp",
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-path",
-			"onsails/lspkind.nvim"
+			"L3MON4D3/LuaSnip",
+			"saadparwaiz1/cmp_luasnip",
+			"onsails/lspkind.nvim",
 		},
 	})
 
 	-- null-ls - linter and formatter
 	use({
-		"jose-elias-alvarez/null-ls.nvim",
+		"nvimtools/none-ls.nvim",
 		requires = { "nvim-lua/plenary.nvim", "jay-babu/mason-null-ls.nvim" },
 	})
 
-
 	-- vim-be-good - a gome for vim
 	use({ "ThePrimeagen/vim-be-good" })
-
 end)
