@@ -48,4 +48,26 @@ return {
 			ColorMyPencils()
 		end,
 	},
+	{ "catppuccin/nvim", name = "catppuccin", priority = 1000 },
+	{
+		"navarasu/onedark.nvim",
+		config = function()
+			-- Lua
+			require("onedark").setup({
+				style = "darker",
+			})
+		end,
+	},
+	{
+		"rebelot/kanagawa.nvim",
+		config = function()
+			require("kanagawa").setup({
+				theme = "wave", -- Load "wave" theme when 'background' option is not set
+				background = { -- map the value of 'background' option to a theme
+					dark = "wave", -- try "dragon" !
+					light = "lotus",
+				},
+			})
+		end,
+	},
 }
