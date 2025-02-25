@@ -44,18 +44,23 @@ return {
 				},
 			})
 
-			vim.cmd("colorscheme rose-pine")
-			ColorMyPencils()
+			-- vim.cmd("colorscheme rose-pine")
+			-- ColorMyPencils()
 		end,
 	},
-	{ "catppuccin/nvim", name = "catppuccin", priority = 1000 },
 	{
-		"navarasu/onedark.nvim",
+		"catppuccin/nvim",
+		name = "catppuccin",
 		config = function()
-			-- Lua
-			require("onedark").setup({
-				style = "darker",
+			require("catppuccin").setup({
+				flavour = "mocha", -- latte, frappe, macchiato, mocha
+				background = { -- :h background
+					light = "latte",
+					dark = "mocha",
+				},
 			})
+			vim.cmd("colorscheme catppuccin")
+			ColorMyPencils()
 		end,
 	},
 	{
