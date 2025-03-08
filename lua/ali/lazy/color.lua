@@ -60,7 +60,7 @@ return {
 				},
 			})
 			vim.cmd("colorscheme catppuccin")
-			ColorMyPencils()
+			ColorMyPencils("catppuccin")
 		end,
 	},
 	{

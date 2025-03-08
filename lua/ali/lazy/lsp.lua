@@ -27,6 +27,7 @@ return {
 
 		require("fidget").setup({})
 		require("mason").setup()
+
 		require("mason-lspconfig").setup({
 			ensure_installed = {
 				"lua_ls",
@@ -53,6 +54,32 @@ return {
 						},
 					})
 				end,
+
+				["ts_ls"] = function()
+					require("lspconfig").ts_ls.setup({
+						capabilities = capabilities,
+						on_attach = function(client, bufnr)
+							-- Disable formatting capabilities
+							client.server_capabilities.documentFormattingProvider = false
+							client.server_capabilities.documentRangeFormattingProvider = false
+
+							-- Disable diagnostics (linting)
+							client.server_capabilities.diagnostics = false
+							vim.lsp.handlers["textDocument/publishDiagnostics"] = function() end
+						end,
+					})
+				end,
+
+				["gopls"] = function()
+					local lspconfig = require("lspconfig")
+					lspconfig.gopls.setup({
+						settings = {
+							gopls = {
+								gofumpt = true,
+							},
+						},
+					})
+				end,
 			},
 		})
 
@@ -65,7 +92,6 @@ return {
 				end,
 			},
 			mapping = cmp.mapping.preset.insert({
-
 				["<CR>"] = cmp.mapping.confirm({ select = true }),
 				["<Tab>"] = cmp.mapping.select_next_item(cmp_select),
 				["<S-Tab>"] = cmp.mapping.select_prev_item(cmp_select),
