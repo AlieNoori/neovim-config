@@ -29,11 +29,12 @@ return {
 		null_ls.setup({
 			sources = {
 				-- formatting
-				null_ls.builtins.formatting.stylua, -- lua
-				null_ls.builtins.formatting.gofumpt, -- go
-				null_ls.builtins.formatting.goimports, -- Go
-				null_ls.builtins.formatting.prettierd.with({ -- Web
+				null_ls.builtins.formatting.stylua,
+				null_ls.builtins.formatting.gofumpt,
+				null_ls.builtins.formatting.goimports,
+				null_ls.builtins.formatting.prettierd.with({
 					filetypes = {
+						"gohtml",
 						"html",
 						"css",
 						"json",
@@ -46,7 +47,7 @@ return {
 				}),
 
 				-- Linting
-				null_ls.builtins.diagnostics.golangci_lint, -- Go
+				null_ls.builtins.diagnostics.golangci_lint,
 				require("none-ls.diagnostics.eslint"),
 			},
 		})
