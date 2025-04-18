@@ -8,58 +8,77 @@ return {
 	},
 	event = { "BufWritePre" },
 	config = function()
-		-- Ensure Mason tools are installed
 		require("mason").setup()
 		require("mason-tool-installer").setup({
 			ensure_installed = {
-				-- Formatters
 				"stylua",
 				"gofumpt",
 				"goimports",
 				"prettierd",
 
-				-- Linters
 				"eslint",
 				"golangci-lint",
 			},
 		})
 
-		-- Null-ls setup
 		local null_ls = require("null-ls")
-		null_ls.setup({
-			sources = {
-				-- formatting
-				null_ls.builtins.formatting.stylua,
-				null_ls.builtins.formatting.gofumpt,
-				null_ls.builtins.formatting.goimports,
-				null_ls.builtins.formatting.prettierd.with({
-					filetypes = {
-						"gohtml",
-						"html",
-						"css",
-						"json",
-						"mjs",
-						"javascript",
-						"typescript",
-						"javascriptreact",
-						"typescriptreact",
-					},
-				}),
+		local sources = {
+			null_ls.builtins.formatting.stylua,
+			null_ls.builtins.formatting.gofumpt,
+			null_ls.builtins.formatting.goimports,
+			null_ls.builtins.formatting.prettierd.with({
+				filetypes = {
+					"gohtml",
+					"html",
+					"css",
+					"json",
+					"mjs",
+					"javascript",
+					"typescript",
+					"javascriptreact",
+					"typescriptreact",
+				},
+			}),
 
-				-- Linting
-				null_ls.builtins.diagnostics.golangci_lint,
-				require("none-ls.diagnostics.eslint"),
-			},
+			null_ls.builtins.diagnostics.golangci_lint,
+		}
+
+		local function eslint_config_exists()
+			local eslint_files = {
+				".eslintrc.js",
+				".eslintrc.cjs",
+				".eslintrc.json",
+				".eslintrc.yaml",
+				".eslintrc.yml",
+				".eslintrc",
+				"eslint.config.js",
+			}
+
+			local current_dir = vim.fn.getcwd()
+			for _, file in ipairs(eslint_files) do
+				if vim.fn.filereadable(current_dir .. "/" .. file) == 1 then
+					return true
+				end
+			end
+
+			return false
+		end
+
+		if eslint_config_exists() then
+			table.insert(sources, require("none-ls.diagnostics.eslint"))
+		end
+
+		null_ls.setup({
+			sources = sources,
 		})
 
-		-- Format on save
 		vim.api.nvim_create_autocmd("BufWritePre", {
 			callback = function()
-				vim.lsp.buf.format({ async = false })
+				vim.lsp.buf.format({
+					async = false,
+					timeout_ms = 10000,
+				})
 			end,
 		})
-
-		-- Manual formatting keymap
-		vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, { desc = "Format buffer" })
 	end,
 }

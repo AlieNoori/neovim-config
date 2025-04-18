@@ -28,6 +28,7 @@ vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
 
 -- This is going to get me cancelled
 vim.keymap.set("i", "<C-c>", "<Esc>")
+-- vim.keymap.set("i", "<leader>jj", "<Esc>")
 
 vim.keymap.set("n", "Q", "<nop>")
 vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
@@ -50,38 +51,4 @@ vim.keymap.set("n", "<leader><leader>", function()
 	vim.cmd("so")
 end)
 
--- function AutoCloseCurlyBrace()
--- 	local line = vim.api.nvim_get_current_line()
--- 	local col = vim.api.nvim_win_get_cursor(0)[2]
---
--- 	if line:sub(col + 1, col + 1) == "{" then
--- 		return "{}<Left>"
--- 	end
---
--- 	return "{}<Left>"
--- end
---
--- function HandleEnterInsideBraces()
--- 	local line = vim.api.nvim_get_current_line()
--- 	local col = vim.api.nvim_win_get_cursor(0)[2]
---
--- 	if line:sub(col, col) == "{" and line:sub(col + 1, col + 1) == "}" then
--- 		return "\r\r<Up><C-t>"
--- 	end
---
--- 	return "\r"
--- end
---
--- function HandleCloseBrace()
--- 	local line = vim.api.nvim_get_current_line()
--- 	local col = vim.api.nvim_win_get_cursor(0)[2]
---
--- 	if line:sub(col, col) == "{" and line:sub(col + 1, col + 1) == "}" then
--- 		return "}"
--- 	end
---
--- 	return "}"
--- end
--- vim.keymap.set("i", "{", AutoCloseCurlyBrace, { expr = true })
--- vim.keymap.set("i", "<CR>", HandleEnterInsideBraces, { expr = true })
--- vim.keymap.set("i", "}", HandleCloseBrace, { expr = true })
+vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition)
