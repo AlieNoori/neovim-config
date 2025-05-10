@@ -15,10 +15,10 @@ vim.keymap.set("n", "=ap", "ma=ap'a")
 vim.keymap.set("n", "<leader>zig", "<cmd>LspRestart<cr>")
 
 vim.keymap.set("n", "<leader>vwm", function()
-	require("vim-with-me").StartVimWithMe()
+    require("vim-with-me").StartVimWithMe()
 end)
 vim.keymap.set("n", "<leader>svwm", function()
-	require("vim-with-me").StopVimWithMe()
+    require("vim-with-me").StopVimWithMe()
 end)
 
 -- greatest remap ever
@@ -36,7 +36,7 @@ vim.keymap.set("i", "<C-c>", "<Esc>")
 vim.keymap.set("n", "Q", "<nop>")
 vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
 vim.keymap.set("n", "<leader>f", function()
-	require("conform").format({ bufnr = 0 })
+    require("conform").format({ bufnr = 0 })
 end)
 
 vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
@@ -56,9 +56,40 @@ vim.keymap.set("n", "<leader>ef", 'oif err != nil {<CR>}<Esc>Olog.Fatalf("error:
 vim.keymap.set("n", "<leader>el", 'oif err != nil {<CR>}<Esc>O.logger.Error("error", "error", err)<Esc>F.;i')
 
 vim.keymap.set("n", "<leader>ca", function()
-	require("cellular-automaton").start_animation("make_it_rain")
+    require("cellular-automaton").start_animation("make_it_rain")
 end)
 
 vim.keymap.set("n", "<leader><leader>", function()
-	vim.cmd("so")
+    vim.cmd("so")
 end)
+
+-- -------------------------------
+vim.keymap.set("n", "<Tab>", function()
+    require('cokeline.mappings').by_step('focus', 1)
+end)
+
+vim.keymap.set("n", "<S-Tab>", function()
+    require('cokeline.mappings').by_step('focus', -1)
+end)
+
+vim.keymap.set("n", "<leader>nt", function()
+    require('cokeline.mappings').by_step('switch', 1)
+end)
+
+vim.keymap.set("n", "<leader>pt", function()
+    require('cokeline.mappings').by_step('switch', -1)
+end)
+
+vim.keymap.set("n", "<leader>pp", function()
+    require('cokeline.mappings').by_step('close', 0)
+end)
+
+for i = 1, 9 do
+    vim.keymap.set("n", ("<F%s>"):format(i), function()
+        require('cokeline.mappings').by_index('switch', i)
+    end)
+
+    vim.keymap.set("n", ("<Leader>%s"):format(i), function()
+        require('cokeline.mappings').by_index('focus', i)
+    end)
+end
