@@ -6,14 +6,14 @@ return {
         require("conform").setup({
             formatters_by_ft = {
                 lua = { "stylua", lsp_format = "fallback" },
-                go = { "gofmt", lsp_format = "fallback" },
+                go = { "gofumpt", "goimports", lsp_format = "fallback" },
                 javascript = { "prettierd" },
                 typescript = { "prettierd" },
                 javascriptreact = { "prettierd" },
                 typescriptreact = { "prettierd" },
             },
             format_on_save = {
-                timeout_ms = 10000,
+                timeout_ms = 5000,
             },
         })
         vim.api.nvim_create_autocmd("BufWritePre", {
