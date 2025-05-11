@@ -1,5 +1,5 @@
 function ColorMyPencils(color)
-    color = color or "catppuccin-mocha" or "rose-pine-moon"
+    color = color or "gruvbox" or "catppuccin-mocha" or "rose-pine-moon"
     vim.cmd.colorscheme(color)
 
     vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
@@ -13,14 +13,6 @@ return {
     },
     { "catppuccin/nvim", name = "catppuccin", priority = 10 },
 
-    {
-        "folke/tokyonight.nvim",
-        lazy = false,
-        opts = {},
-        config = function()
-            ColorMyPencils()
-        end,
-    },
     {
         "ellisonleao/gruvbox.nvim",
         name = "gruvbox",
@@ -80,7 +72,7 @@ return {
             require("rose-pine").setup({
                 disable_background = true,
                 styles = {
-                    italic = false,
+                    italic = true,
                 },
             })
 
