@@ -53,6 +53,8 @@ vim.keymap.set("n", "<leader>ea", 'oassert.NoError(err, "")<Esc>F";a')
 
 vim.keymap.set("n", "<leader>ef", 'oif err != nil {<CR>}<Esc>Olog.Fatalf("error: %s\\n", err.Error())<Esc>jj')
 
+vim.keymap.set("n", "<leader>etf", 'oif err != nil {<CR>}<Esc>Ot.Fatalf("error: %s\\n", err.Error())<Esc>jj')
+
 vim.keymap.set("n", "<leader>el", 'oif err != nil {<CR>}<Esc>O.logger.Error("error", "error", err)<Esc>F.;i')
 
 vim.keymap.set("n", "<leader>ca", function()
@@ -63,7 +65,9 @@ vim.keymap.set("n", "<leader><leader>", function()
     vim.cmd("so")
 end)
 
--- -------------------------------
+vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { desc = "Go to Definition" })
+
+---------------------------------
 vim.keymap.set("n", "<Tab>", function()
     require('cokeline.mappings').by_step('focus', 1)
 end)
