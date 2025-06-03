@@ -1,5 +1,5 @@
 function ColorMyPencils(color)
-    color = color or "gruvbox" or "catppuccin-mocha" or "rose-pine-moon"
+    color = color or "catppuccin-mocha" or "rose-pine-moon" or "gruvbox"
     vim.cmd.colorscheme(color)
 
     vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
@@ -11,6 +11,7 @@ return {
     {
         "erikbackman/brightburn.vim",
     },
+
     { "catppuccin/nvim", name = "catppuccin", priority = 10 },
 
     {
@@ -63,6 +64,12 @@ return {
                 },
             })
         end,
+    },
+    {
+        "loctvl842/monokai-pro.nvim",
+        config = function()
+            require("monokai-pro").setup()
+        end
     },
 
     {
