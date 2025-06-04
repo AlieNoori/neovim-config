@@ -23,6 +23,7 @@ return {
         "L3MON4D3/LuaSnip",
         "saadparwaiz1/cmp_luasnip",
         "j-hui/fidget.nvim",
+        "onsails/lspkind.nvim",
     },
     event = "BufReadPre",
     config = function()
@@ -132,6 +133,27 @@ return {
                 ["<CR>"] = cmp.mapping.confirm({ select = true }),
                 ["<C-Space>"] = cmp.mapping.complete(),
             }),
+            formatting = {
+                -- format = require('lspkind').cmp_format({
+                -- mode = 'symbol',
+                -- maxwidth = 50,
+                -- ellipsis_char = '…',
+                -- })
+                format = function(entry, item)
+                    local color_item = require("nvim-highlight-colors").format(entry, { kind = item.kind })
+                    item = require("lspkind").cmp_format({
+                        mode = 'symbol',
+                        maxwidth = 50,
+                        ellipsis_char = '…',
+                    })(entry, item)
+                    if color_item.abbr_hl_group then
+                        item.kind_hl_group = color_item.abbr_hl_group
+                        item.kind = color_item.abbr
+                    end
+                    return item
+                end
+            },
+
             sources = cmp.config.sources({
                 { name = "copilot", group_index = 2 },
                 { name = "nvim_lsp" },
