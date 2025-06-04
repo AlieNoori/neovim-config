@@ -68,32 +68,32 @@ end)
 vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { desc = "Go to Definition" })
 
 ---------------------------------
-vim.keymap.set("n", "<Tab>", function()
-    require('cokeline.mappings').by_step('focus', 1)
-end)
-
-vim.keymap.set("n", "<S-Tab>", function()
-    require('cokeline.mappings').by_step('focus', -1)
-end)
-
-vim.keymap.set("n", "<leader>nt", function()
-    require('cokeline.mappings').by_step('switch', 1)
-end)
-
-vim.keymap.set("n", "<leader>pt", function()
-    require('cokeline.mappings').by_step('switch', -1)
-end)
-
-vim.keymap.set("n", "<leader>pp", function()
-    require('cokeline.mappings').by_step('close', 0)
-end)
-
-for i = 1, 9 do
-    vim.keymap.set("n", ("<F%s>"):format(i), function()
-        require('cokeline.mappings').by_index('switch', i)
-    end)
-
-    vim.keymap.set("n", ("<Leader>%s"):format(i), function()
-        require('cokeline.mappings').by_index('focus', i)
-    end)
-end
+-- vim.keymap.set("n", "<Tab>", function()
+--     require('cokeline.mappings').by_step('focus', 1)
+-- end)
+--
+-- vim.keymap.set("n", "<S-Tab>", function()
+--     require('cokeline.mappings').by_step('focus', -1)
+-- end)
+--
+-- vim.keymap.set("n", "<leader>nt", function()
+--     require('cokeline.mappings').by_step('switch', 1)
+-- end)
+--
+-- vim.keymap.set("n", "<leader>pt", function()
+--     require('cokeline.mappings').by_step('switch', -1)
+-- end)
+--
+-- vim.keymap.set("n", "<leader>pp", function()
+--     require('cokeline.mappings').by_step('close', 0)
+-- end)
+--
+-- for i = 1, 9 do
+--     vim.keymap.set("n", ("<F%s>"):format(i), function()
+--         require('cokeline.mappings').by_index('switch', i)
+--     end)
+--
+--     vim.keymap.set("n", ("<Leader>%s"):format(i), function()
+--         require('cokeline.mappings').by_index('focus', i)
+--     end)
+-- end

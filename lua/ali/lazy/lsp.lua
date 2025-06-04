@@ -23,12 +23,13 @@ return {
         "L3MON4D3/LuaSnip",
         "saadparwaiz1/cmp_luasnip",
         "j-hui/fidget.nvim",
+        "onsails/lspkind.nvim",
     },
     event = "BufReadPre",
     config = function()
-        require("conform").setup({
-            formatters_by_ft = {},
-        })
+        -- require("conform").setup({
+        --     formatters_by_ft = {},
+        -- })
         local cmp = require("cmp")
         local cmp_lsp = require("cmp_nvim_lsp")
         local capabilities = vim.tbl_deep_extend(
@@ -68,6 +69,7 @@ return {
                     vim.g.zig_fmt_parse_errors = 0
                     vim.g.zig_fmt_autosave = 0
                 end,
+
                 ["lua_ls"] = function()
                     local lspconfig = require("lspconfig")
                     lspconfig.lua_ls.setup({
@@ -87,20 +89,22 @@ return {
                         },
                     })
                 end,
+
                 -- ["ts_ls"] = function()
-                -- 	require("lspconfig").ts_ls.setup({
-                -- 		capabilities = capabilities,
-                -- 		on_attach = function(client, bufnr)
-                -- 			-- Disable formatting capabilities
-                -- 			client.server_capabilities.documentFormattingProvider = false
-                -- 			client.server_capabilities.documentRangeFormattingProvider = false
+                --     require("lspconfig").ts_ls.setup({
+                --         capabilities = capabilities,
+                --         on_attach = function(client, bufnr)
+                --             -- Disable formatting capabilities
+                --             client.server_capabilities.documentFormattingProvider = false
+                --             client.server_capabilities.documentRangeFormattingProvider = false
                 --
-                -- 			-- Disable diagnostics (linting)
-                -- 			client.server_capabilities.diagnostics = false
-                -- 			vim.lsp.handlers["textDocument/publishDiagnostics"] = function() end
-                -- 		end,
-                -- 	})
+                --             -- Disable diagnostics (linting)
+                --             client.server_capabilities.diagnostics = false
+                --             vim.lsp.handlers["textDocument/publishDiagnostics"] = function() end
+                --         end,
+                --     })
                 -- end,
+
                 ["gopls"] = function()
                     local lspconfig = require("lspconfig")
                     lspconfig.gopls.setup({
@@ -132,6 +136,27 @@ return {
                 ["<CR>"] = cmp.mapping.confirm({ select = true }),
                 ["<C-Space>"] = cmp.mapping.complete(),
             }),
+            formatting = {
+                -- format = require('lspkind').cmp_format({
+                -- mode = 'symbol',
+                -- maxwidth = 50,
+                -- ellipsis_char = '…',
+                -- })
+                format = function(entry, item)
+                    local color_item = require("nvim-highlight-colors").format(entry, { kind = item.kind })
+                    item = require("lspkind").cmp_format({
+                        mode = 'symbol',
+                        maxwidth = 50,
+                        ellipsis_char = '…',
+                    })(entry, item)
+                    if color_item.abbr_hl_group then
+                        item.kind_hl_group = color_item.abbr_hl_group
+                        item.kind = color_item.abbr
+                    end
+                    return item
+                end
+            },
+
             sources = cmp.config.sources({
                 { name = "copilot", group_index = 2 },
                 { name = "nvim_lsp" },
