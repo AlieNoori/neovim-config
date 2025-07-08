@@ -27,9 +27,6 @@ return {
     },
     event = "BufReadPre",
     config = function()
-        -- require("conform").setup({
-        --     formatters_by_ft = {},
-        -- })
         local cmp = require("cmp")
         local cmp_lsp = require("cmp_nvim_lsp")
         local capabilities = vim.tbl_deep_extend(
@@ -46,6 +43,10 @@ return {
                 "lua_ls",
                 "gopls",
                 "ts_ls",
+                "bashls",
+                "cssls",
+                "html",
+                "tailwindcss"
             },
             handlers = {
                 function(server_name) -- default handler (optional)
